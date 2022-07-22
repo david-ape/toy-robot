@@ -62,15 +62,17 @@ Output: `3,3,NORTH`
 
 1. It is recommended that you have ruby 2.7.3 and bundler 2.1.4 installed
 
-2. Clone or pull the latest version of the git repository.
+2. Clone or pull the latest version of the git repository. E.g.:
 
-3. cd to the repository
+    `git clone https://github.com/david-ape/toy-robot.git`
 
-4. Run:
+4. cd to the repository
+
+5. Run:
 
     `bin/setup`
 
-5. If you want to install the gem (optional), then also run:
+6. If you want to install the gem (optional), then also run:
 
     `bundle exec rake install`
 
@@ -104,6 +106,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 - Add integration tests with [Cucumber and/or Aruba](https://bundler.io/guides/creating_gem.html#testing-a-command-line-interface)
 - Mark up for RDoc or Yard documentation
+- Make argv handling more robust (currently just ignores bad optios)
 - Push the gem to rubygems
 
 ## Contributing
