@@ -17,7 +17,7 @@ RSpec.describe ToyRobot::Robot do
     it 'returns false with an explanation' do
       success,explanation = robot.obey('Place')
       expect(success).to be false
-      expect(explanation).to eq("I'm sorry Commander, I'm afraid I can't do that (Expecting 3 arguments for the place command, got(0)")
+      expect(explanation).to eq("I'm sorry Commander, I'm afraid I can't do that (Expecting 3 arguments for the place command, got 0)")
     end
   end
 
@@ -49,7 +49,7 @@ RSpec.describe ToyRobot::Robot do
     it 'returns true with an acknowledgement' do
       success,explanation = robot.obey('Place 0,1,West')
       expect(success).to be true
-      expect(explanation).to eq("Yes Commander, I'm now at 0,1,West")
+      expect(explanation).to eq("Affirmative Commander, I'm now at 0,1,West")
     end
   end
 
@@ -88,7 +88,7 @@ RSpec.describe ToyRobot::Robot do
         direction = placement.split(',')[2].downcase
         success,explanation = robot.obey('move')
         expect(success).to be true
-        expect(explanation).to eq("Yes Commander, moved #{direction}")
+        expect(explanation).to eq("Affirmative Commander, moved #{direction}")
       end
     end
   end
@@ -103,7 +103,7 @@ RSpec.describe ToyRobot::Robot do
         new_direction = placement_and_new_direction[1]
         success,explanation = robot.obey('left')
         expect(success).to be true
-        expect(explanation).to eq("Yes Commander, turned left toward the #{new_direction}")
+        expect(explanation).to eq("Affirmative Commander, turned left toward the #{new_direction}")
       end
     end
   end
@@ -118,7 +118,7 @@ RSpec.describe ToyRobot::Robot do
         new_direction = placement_and_new_direction[1]
         success,explanation = robot.obey('right')
         expect(success).to be true
-        expect(explanation).to eq("Yes Commander, turned right toward the #{new_direction}")
+        expect(explanation).to eq("Affirmative Commander, turned right toward the #{new_direction}")
       end
     end
   end
@@ -133,7 +133,7 @@ RSpec.describe ToyRobot::Robot do
         success = explanation = nil # instantiate so they are in scope for subsequent tests
         expect { success,explanation = robot.obey('report') }.to output("#{placement.upcase}\n").to_stdout
         expect(success).to be true
-        expect(explanation).to eq("Yes Commander, current position reported")
+        expect(explanation).to eq("Affirmative Commander, current position reported")
       end
     end
   end

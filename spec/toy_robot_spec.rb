@@ -61,7 +61,7 @@ RSpec.describe ToyRobot do
       let(:commands) { 'place' }
 
       it 'reports an error' do
-        expect { subject }.to output("I'm sorry Commander, I'm afraid I can't do that (Expecting 3 arguments for the place command, got(0)\n").to_stdout
+        expect { subject }.to output("I'm sorry Commander, I'm afraid I can't do that (Expecting 3 arguments for the place command, got 0)\n").to_stdout
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe ToyRobot do
         let(:commands) { 'place 1,2,North' }
 
         it 'reports success' do
-          expect { subject }.to output("Yes Commander, I'm now at 1,2,North\n").to_stdout
+          expect { subject }.to output("Affirmative Commander, I'm now at 1,2,North\n").to_stdout
         end
       end
     end
@@ -81,10 +81,10 @@ RSpec.describe ToyRobot do
       let(:argv) { ['-v','-n','Dave'] }
 
       context 'when an invalid command is given' do
-        let(:commands) { 'badcommand' }
+        let(:commands) { 'Open the pod bay doors' }
 
         it 'reports an error addressing Commander with the specified name' do
-          expect { subject }.to output("I'm sorry Dave, I'm afraid I can't do that (I don't understand \"badcommand\")\n").to_stdout
+          expect { subject }.to output("I'm sorry Dave, I'm afraid I can't do that (I don't understand \"Open the pod bay doors\")\n").to_stdout
         end
       end
     end

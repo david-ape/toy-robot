@@ -2,52 +2,33 @@
 
 #### What is this ?
 
-Toy Robot is a ruby coding exercise that we get our potential candidates  complete for us (Mable) to understand their capabilities.  
+Toy Robot is a ruby coding exercise that the nice people at [Mable](https://mable.com.au/) ask their potential candidates to do. The original repository is [here](https://github.com/bettercaring/toy-robot).
 
-#### What do I need to do ?
+The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5 units x 5 units. You control the robot by giving it commands.  The table top is broken into 25 locations with coordinates from (0,0) at the bottom left southwest corner, to (4,4) at the top right northeast corner. You start by placing the  robot on the table grid facing a certain direction (North, South, East or West). Then you can tell it to move or turn or report its location. The robot will ignore commands that place it on an invalid location or which would cause it to move to an invalid location. You must place the robot before doing anything else (it will ignore other commands until you do).
 
-## Specification
+The commands are:
 
-### Description
-- The application is a simulation of a toy robot moving on a square tabletop, 
-  of dimensions 5 units x 5 units.
-- There are no other obstructions on the table surface.
-- The robot is free to roam around the surface of the table, but must be 
-  prevented from falling to destruction. Any movement that would result in the 
-  robot falling from the table must be prevented, however further valid 
-  movement commands must still be allowed.
-- Create an application that can read in commands of the following form:
+* PLACE X,Y,F (e.g. PLACE 0,1,NORTH)
+* MOVE
+* LEFT
+* RIGHT
+* REPORT
+* HELP
+* QUIT
 
-```
-PLACE X,Y,F
-MOVE
-LEFT
-RIGHT
-REPORT
-```
+PLACE will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST. The origin (0,0) can be considered to be the SOUTH WEST most corner. The first valid command to the robot is a PLACE command (other commands will be ignored until a valid PLACE command is given).
 
-- PLACE will put the toy robot on the table in position X,Y and facing NORTH,
-  SOUTH, EAST or WEST.
-- The origin (0,0) can be considered to be the SOUTH WEST most corner.
-- The first valid command to the robot is a PLACE command, after that, any
-  sequence of commands may be issued, in any order, including another PLACE
-  command. The application should discard all commands in the sequence until a
-  valid PLACE command has been executed.
-- MOVE will move the toy robot one unit forward in the direction it is currently
+MOVE will move the toy robot one unit forward in the direction it is currently
   facing.
-- LEFT and RIGHT will rotate the robot 90 degrees in the specified direction
-  without changing the position of the robot.
-- REPORT will announce the X,Y and F of the robot. This can be in any form, but
-  standard output is sufficient.
-- A robot that is not on the table can choose the ignore the MOVE, LEFT, RIGHT
-  and REPORT commands.
-- Input can be from a file, or from standard input, as the developer chooses.
-- Provide test data to exercise the application.
 
-### Constraints
-The toy robot must not fall off the table during movement. This also includes 
-the initial placement of the toy robot. Any move that would cause the robot 
-to fall must be ignored.
+LEFT and RIGHT will rotate the robot 90 degrees in the specified direction
+  without changing the position of the robot.
+
+REPORT will announce the X,Y and F of the robot.
+
+HELP will display usage information and the list of commands.
+
+QUIT will exit the app.
 
 ### Example Input and Output
 a)
@@ -77,79 +58,62 @@ REPORT
 ```
 Output: `3,3,NORTH`
 
-#### Why am I doing this ?
-
-At Mable we belive these kind of coding challenges will give us more visibility on the candidate's strengths. On the other have, candidates can show their 
-capabilities by applying what they already know. 
-
-#### What’s next ?
-
-- clone this repo
-- Do your changes
-- Email us the link to your public git repo with the solution
-
-
-#### What do We expect as deliveries?
-
-While we love to see a working code, the most important aspects we are looking in to is, 
-
-- How you would approach a problem 
-- How you approach around testing 
-- Any other related documents (E.g README) that will help someone to set up and run this project.
-
-#### What are the next steps ? 
-
-Once you completed the exercise and let us know, we'll go through your code and if we are happy with your code, we'll contact you for the next step, which is a 
-discussion on this code and your thinking / approach to this problem. 
-
-#### Toy robot is a very common coding test and I can find heaps of sample code ?
-
-Yes, true, this is a very famous common test. However, we sincerely hope that you'll not just copy and paste a code from internet :). 
-
-In Fact the author of this test himself has described, why this test is still relevant, even though there are many examples out there
-
-[Toy Robot Coding Puzzle](https://joneaves.wordpress.com/2014/07/21/toy-robot-coding-test/)
-
-All the very best !!!
-
-
-TODO: Update and merge the following with the original text above.
-
 ## Installation
 
-Add this line to your application's Gemfile:
+1. It is recommended that you have ruby 2.7.3 and bundler 2.1.4 installed
 
-```ruby
-gem 'toy_robot'
-```
+2. Clone or pull the latest version of the git repository.
 
-And then execute:
+3. cd to the repository
 
-    $ bundle install
+4. Run
 
-Or install it yourself as:
+    `bin/setup`
 
-    $ gem install toy_robot
+5. If you want to install the gem (optional), then also run.
+
+    `bundle exec rake install`
 
 ## Usage
 
-TODO: Write usage instructions here
+    toy_robot [options] # if gem installed
+
+      or
+
+    ruby -Ilib ./exe/toy_robot [options]
+
+The options are:
+
+    -h, --help             Show usage
+    -n, --name YOUR NAME   How the robot should address you
+    -v, --verbose          Enable verbose mode
+
+It is recommended that new users use the verbose and name options. Verbose provides more feedback and name personalises the experience. E.g.
+
+    ruby -Ilib ./exe/toy_robot -v -n Dave
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
+Because it is a gem, there are a lot of boilerplate files. The interesting ones are in the exe, lib, and spec directories.
+
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+### Suggested further work
+
+- Add integration tests with [Cucumber and/or Aruba](https://bundler.io/guides/creating_gem.html#testing-a-command-line-interface)
+- Mark up for RDoc or Yard documentation
+- Push the gem to rubygems
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/toy_robot. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/toy_robot/blob/master/CODE_OF_CONDUCT.md).
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/david-ape/toy_robot. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/david-ape/toy_robot/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+See [license](https://github.com/david-ape/toy-robot/blob/main/LICENSE.txt).
 
 ## Code of Conduct
 
-Everyone interacting in the ToyRobot project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/toy_robot/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the ToyRobot project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/david-ape/toy-robot/blob/main/CODE_OF_CONDUCT.md).

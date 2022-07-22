@@ -37,13 +37,10 @@ module ToyRobot
   # until I can figure out how to test
   # with STDIN
   def self.run(argv=[], io=STDIN)
-    # TODO: Investigate why this is necessary
-    #       (I think my use of instance variables
-    #        in a module might be wonky. This works
-    #        but maybe we should make this a class
-    #        instead)
+    # Clear instance vars in case we are running multiple times
     @robot = nil
     @name = nil
+    @verbose = nil
 
     process_args(argv)
 
@@ -72,6 +69,8 @@ module ToyRobot
     argv.each_with_index do |option, i|
       case option.downcase
       when "-h", "--help"
+        puts
+        puts "toy_robot #{ToyRobot::VERSION}"
         puts "Usage: toy_robot [options] [<file]"
         puts "  -h, --help             Show usage"
         puts "  -n, --name YOUR NAME   How the robot should address you"

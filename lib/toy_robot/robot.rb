@@ -56,7 +56,7 @@ module ToyRobot
       args = (arg_string || '').split(',')
       arg_quantity = args.length
       unless arg_quantity == 3
-        return false, cant_do_message("Expecting 3 arguments for the place command, got(#{arg_quantity}")
+        return false, cant_do_message("Expecting 3 arguments for the place command, got #{arg_quantity}")
       end
 
       # Because the table surface is so simple and so small, we can
@@ -168,7 +168,7 @@ module ToyRobot
     end
 
     def acknowledgment(result)
-      "Yes #{commander}, #{result}"
+      "Affirmative #{commander}, #{result}"
     end
   end
 end
