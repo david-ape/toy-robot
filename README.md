@@ -66,11 +66,11 @@ Output: `3,3,NORTH`
 
 3. cd to the repository
 
-4. Run
+4. Run:
 
     `bin/setup`
 
-5. If you want to install the gem (optional), then also run.
+5. If you want to install the gem (optional), then also run:
 
     `bundle exec rake install`
 
