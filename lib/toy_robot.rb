@@ -12,6 +12,14 @@ module ToyRobot
     Cli.new(argv).run(io)
   end
 
+  USAGE = <<~EOS
+    toy_robot #{ToyRobot::VERSION}
+    Usage: toy_robot [options] [<file]
+      -h, --help             Show usage
+      -n, --name YOUR NAME   How the robot should address you
+      -v, --verbose          Enable verbose mode
+  EOS
+
   HELP_MSG = <<~EOS
     This app lets you control a toy robot on a table top. The table top is broken
     into 25 locations with coordinates from (0,0) at the bottom left southwest
@@ -58,11 +66,7 @@ module ToyRobot
         case option.downcase
         when "-h", "--help"
           puts
-          puts "toy_robot #{ToyRobot::VERSION}"
-          puts "Usage: toy_robot [options] [<file]"
-          puts "  -h, --help             Show usage"
-          puts "  -n, --name YOUR NAME   How the robot should address you"
-          puts "  -v, --verbose          Enable verbose mode"
+          puts USAGE
           puts
           puts HELP_MSG
           exit

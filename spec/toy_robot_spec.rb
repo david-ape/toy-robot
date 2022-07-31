@@ -6,12 +6,9 @@ RSpec.describe ToyRobot do
   context 'when run with -h' do
     subject { ToyRobot.run(["-h"]) }
     it "displays usage and exits" do
-      # TODO: Figure out how to check the usage message
-      #       (the exit seems to stop us being able to do a check
-      #       like "expect... .to output(msg).to_stdout")
-      expect { subject }.to raise_error(SystemExit) do |error|
-        expect(error.status).to eq(0)
-      end
+      expect { subject }
+        .to raise_error(SystemExit) { |error| expect(error.status).to eq(0) }
+        .and output("\n#{ToyRobot::USAGE}\n#{ToyRobot::HELP_MSG}").to_stdout
     end
   end
 
@@ -26,12 +23,12 @@ RSpec.describe ToyRobot do
     context 'when the command is unrecognised' do
       let(:commands) do
         <<~EOS
-          BadCommand
+          Open the pod bay doors
         EOS
       end
 
       it 'reports an error' do
-        expect { subject }.to output("I'm sorry Commander, I'm afraid I can't do that (I don't understand \"BadCommand\")\n").to_stdout
+        expect { subject }.to output("I'm sorry Commander, I'm afraid I can't do that (I don't understand \"Open the pod bay doors\")\n").to_stdout
       end
     end
 
