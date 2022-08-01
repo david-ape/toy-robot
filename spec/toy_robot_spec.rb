@@ -16,8 +16,8 @@ RSpec.describe ToyRobot do
     subject { ToyRobot.run(argv, io) }
 
     let(:argv) { [] }
-    # TODO: Ideally we'd test with STDIN rather with a StringIO
-    #       (or at least by mocking STDIN with a StringIO
+    # TODO: Ideally we'd test with $stdin rather with a StringIO
+    #       (or at least by mocking $stdin with a StringIO
     #        but haven't found a way that works)
     let(:io) { StringIO.new(commands) }
 

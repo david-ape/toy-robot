@@ -7,8 +7,8 @@ module ToyRobot
   # The io argument is a hack for testing. I'm
   # specifying a StringIO in my rspec tests
   # until I can figure out how to test
-  # with STDIN
-  def self.run(argv=[], io=STDIN)
+  # with $stdin
+  def self.run(argv=[], io=$stdin)
     Cli.new(argv).run(io)
   end
 

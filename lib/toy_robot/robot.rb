@@ -1,6 +1,6 @@
 module ToyRobot
 
-  # Class to manage the tabletop constraints
+  # Class describing the table top
   class Surface
     def initialize(min_x=0, max_x=4, min_y=0, max_y=4)
       @min_x = min_x
