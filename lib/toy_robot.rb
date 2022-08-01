@@ -47,6 +47,9 @@ module ToyRobot
   EOS
 
   class Error < StandardError; end
+  class ParserError < Error; end
+  class InvalidArgumentError < Error; end
+  class ExecutionError < Error; end
 
   class Cli
     def initialize(argv)

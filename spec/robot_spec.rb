@@ -13,11 +13,14 @@ RSpec.describe ToyRobot::Robot do
     end
   end
 
-  context 'when given place command with the wrong number of arguments' do
-    it 'returns false with an explanation' do
-      success,explanation = robot.obey('Place')
-      expect(success).to be false
-      expect(explanation).to eq("I'm sorry Commander, I'm afraid I can't do that (Expecting 3 arguments for the place command, got 0)")
+  ['Place', 'place 1', 'PLACE 1,3', 'Place 9,9,northwest'].each do |command|
+    context 'when given a place command with invalid arguments' do
+      it 'returns false with an explanation' do
+        success,explanation = robot.obey(command)
+        expect(success).to be false
+        arg_string = command.split(' ')[1] || ''
+        expect(explanation).to eq("I'm sorry Commander, I'm afraid I can't do that (Invalid argument(s) \"#{arg_string}\" for place command)")
+      end
     end
   end
 
@@ -41,7 +44,7 @@ RSpec.describe ToyRobot::Robot do
     it 'returns false with an explanation' do
       success,explanation = robot.obey('Place 0,1,Southwest')
       expect(success).to be false
-      expect(explanation).to eq("I'm sorry Commander, I'm afraid I can't do that (Invalid F parameter Southwest, expecting North, South, East or West)")
+      expect(explanation).to eq("I'm sorry Commander, I'm afraid I can't do that (Invalid argument(s) \"0,1,southwest\" for place command)")
     end
   end
 
@@ -58,7 +61,7 @@ RSpec.describe ToyRobot::Robot do
       it 'returns false with an explanation' do
         success,explanation = robot.obey(command)
         expect(success).to be false
-        expect(explanation).to eq("I'm sorry Commander, I'm afraid I can't do that (You must place me before issuing \"#{command}\" command)")
+        expect(explanation).to eq("I'm sorry Commander, I'm afraid I can't do that (You must place me before issuing a \"#{command}\" command)")
       end
     end
   end
@@ -88,7 +91,7 @@ RSpec.describe ToyRobot::Robot do
         direction = placement.split(',')[2].downcase
         success,explanation = robot.obey('move')
         expect(success).to be true
-        expect(explanation).to eq("Affirmative Commander, moved #{direction}")
+        expect(explanation).to eq("Affirmative Commander, I have moved #{direction} to (#{robot.current_position_string})")
       end
     end
   end
@@ -138,7 +141,21 @@ RSpec.describe ToyRobot::Robot do
     end
   end
 
-  # Miscellaneous test (the first three are from the spec)
+  ['',' ',"\t",nil].each do | command |
+    context 'when a blank command is issued' do
+      before do
+        robot.obey("#{command}")
+      end
+
+      it 'returns true with an acknowledgement' do
+        success,explanation = robot.obey(command)
+        expect(success).to be true
+        expect(explanation).to eq("Affirmative Commander, ignored blank command")
+      end
+    end
+  end
+
+  # Miscellaneous tests (the first three are from the spec)
   [[['PLACE 0,0,NORTH',
       'MOVE'],
      '0,1,NORTH'],

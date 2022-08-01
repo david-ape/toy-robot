@@ -17,7 +17,8 @@ RSpec.describe ToyRobot do
 
     let(:argv) { [] }
     # TODO: Ideally we'd test with STDIN rather with a StringIO
-    #       (or at least by mocking STDIN with a StringIO)
+    #       (or at least by mocking STDIN with a StringIO
+    #        but haven't found a way that works)
     let(:io) { StringIO.new(commands) }
 
     context 'when the command is unrecognised' do
@@ -58,7 +59,7 @@ RSpec.describe ToyRobot do
       let(:commands) { 'place' }
 
       it 'reports an error' do
-        expect { subject }.to output("I'm sorry Commander, I'm afraid I can't do that (Expecting 3 arguments for the place command, got 0)\n").to_stdout
+        expect { subject }.to output("I'm sorry Commander, I'm afraid I can't do that (Invalid argument(s) \"\" for place command)\n").to_stdout
       end
     end
 
